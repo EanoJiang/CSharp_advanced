@@ -1,0 +1,14 @@
+/Users/User/Desktop/CSharp/CSharp_advanced/Stack相关/bin/Debug/net7.0/Stack相关
+/Users/User/Desktop/CSharp/CSharp_advanced/Stack相关/bin/Debug/net7.0/Stack相关.deps.json
+/Users/User/Desktop/CSharp/CSharp_advanced/Stack相关/bin/Debug/net7.0/Stack相关.runtimeconfig.json
+/Users/User/Desktop/CSharp/CSharp_advanced/Stack相关/bin/Debug/net7.0/Stack相关.dll
+/Users/User/Desktop/CSharp/CSharp_advanced/Stack相关/bin/Debug/net7.0/Stack相关.pdb
+/Users/User/Desktop/CSharp/CSharp_advanced/Stack相关/obj/Debug/net7.0/Stack相关.GeneratedMSBuildEditorConfig.editorconfig
+/Users/User/Desktop/CSharp/CSharp_advanced/Stack相关/obj/Debug/net7.0/Stack相关.AssemblyInfoInputs.cache
+/Users/User/Desktop/CSharp/CSharp_advanced/Stack相关/obj/Debug/net7.0/Stack相关.AssemblyInfo.cs
+/Users/User/Desktop/CSharp/CSharp_advanced/Stack相关/obj/Debug/net7.0/Stack相关.csproj.CoreCompileInputs.cache
+/Users/User/Desktop/CSharp/CSharp_advanced/Stack相关/obj/Debug/net7.0/Stack相关.dll
+/Users/User/Desktop/CSharp/CSharp_advanced/Stack相关/obj/Debug/net7.0/refint/Stack相关.dll
+/Users/User/Desktop/CSharp/CSharp_advanced/Stack相关/obj/Debug/net7.0/Stack相关.pdb
+/Users/User/Desktop/CSharp/CSharp_advanced/Stack相关/obj/Debug/net7.0/Stack相关.genruntimeconfig.cache
+/Users/User/Desktop/CSharp/CSharp_advanced/Stack相关/obj/Debug/net7.0/ref/Stack相关.dll
