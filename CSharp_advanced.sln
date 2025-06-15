@@ -19,13 +19,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hashtable相关", "Hashtabl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hashtable相关习题", "Hashtable相关习题\Hashtable相关习题.csproj", "{B9ED9B3B-7032-47CA-8568-53E895F96BE8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "泛型", "泛型\泛型.csproj", "{14F0A443-D0EB-4552-9C0F-9289506C912A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "泛型习题", "泛型习题\泛型习题.csproj", "{3A84A27A-3197-4A2B-87E0-6B242130EAF3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{CAC7E2D1-E0D9-4CB7-A770-E9F76D28AA4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -60,5 +61,16 @@ Global
 		{B9ED9B3B-7032-47CA-8568-53E895F96BE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9ED9B3B-7032-47CA-8568-53E895F96BE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9ED9B3B-7032-47CA-8568-53E895F96BE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14F0A443-D0EB-4552-9C0F-9289506C912A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14F0A443-D0EB-4552-9C0F-9289506C912A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14F0A443-D0EB-4552-9C0F-9289506C912A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14F0A443-D0EB-4552-9C0F-9289506C912A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A84A27A-3197-4A2B-87E0-6B242130EAF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A84A27A-3197-4A2B-87E0-6B242130EAF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A84A27A-3197-4A2B-87E0-6B242130EAF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A84A27A-3197-4A2B-87E0-6B242130EAF3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

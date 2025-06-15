@@ -1,0 +1,14 @@
+/Users/User/Desktop/CSharp/CSharp_advanced/泛型/bin/Debug/net7.0/泛型
+/Users/User/Desktop/CSharp/CSharp_advanced/泛型/bin/Debug/net7.0/泛型.deps.json
+/Users/User/Desktop/CSharp/CSharp_advanced/泛型/bin/Debug/net7.0/泛型.runtimeconfig.json
+/Users/User/Desktop/CSharp/CSharp_advanced/泛型/bin/Debug/net7.0/泛型.dll
+/Users/User/Desktop/CSharp/CSharp_advanced/泛型/bin/Debug/net7.0/泛型.pdb
+/Users/User/Desktop/CSharp/CSharp_advanced/泛型/obj/Debug/net7.0/泛型.GeneratedMSBuildEditorConfig.editorconfig
+/Users/User/Desktop/CSharp/CSharp_advanced/泛型/obj/Debug/net7.0/泛型.AssemblyInfoInputs.cache
+/Users/User/Desktop/CSharp/CSharp_advanced/泛型/obj/Debug/net7.0/泛型.AssemblyInfo.cs
+/Users/User/Desktop/CSharp/CSharp_advanced/泛型/obj/Debug/net7.0/泛型.csproj.CoreCompileInputs.cache
+/Users/User/Desktop/CSharp/CSharp_advanced/泛型/obj/Debug/net7.0/泛型.dll
+/Users/User/Desktop/CSharp/CSharp_advanced/泛型/obj/Debug/net7.0/refint/泛型.dll
+/Users/User/Desktop/CSharp/CSharp_advanced/泛型/obj/Debug/net7.0/泛型.pdb
+/Users/User/Desktop/CSharp/CSharp_advanced/泛型/obj/Debug/net7.0/泛型.genruntimeconfig.cache
+/Users/User/Desktop/CSharp/CSharp_advanced/泛型/obj/Debug/net7.0/ref/泛型.dll

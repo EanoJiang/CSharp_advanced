@@ -667,16 +667,208 @@ class Monster
 
 ## 泛型的基本概念
 
-* 泛型实现了类型参数化，用于代码复用
+* 泛型实现了**类型参数化**，用于代码复用
 * 通过类型参数化来实现在同一份代码上操作多种类型
-* 相当于类型占位符
+* **相当于类型占位符**
 * 定义类/方法的时候使用替代符来来代表变量类型
-* 当真正使用类和方法时再具体制定类型
+* **当真正使用类和方法时再具体制定类型**
+* 泛型占位符一般用大写字母
+
+### 泛型的作用
+
+1. 不同类型对象的相同逻辑处理，可以选择泛型，提升代码的复用
+2. 使用泛型，可以一定程度**避免装箱拆箱**
+3. eg：自己写泛型类ArrayList `<T>`来解决ArrayList存在的装箱拆箱问题、Stack `<Type>`、Queue `<Type>`、用字典 `Dictionary<T1,T2>`实现Hashtable
 
 ### 泛型分类
 
+#### 语法
+
+泛型类：		class 类名<泛型占位字母>
+
+泛型接口：	interface 接口名<泛型占位字母>
+
+泛型函数：	函数名<泛型占位字母>
+
+泛型占位字母可以有多个，用逗号隔开
+
+#### 泛型类
+
+```csharp
+class TestClass<T>
+{
+    public T value;
+}
+
+//重载——多个泛型占位字母
+class TestClass<T1,T2>
+{
+    public T1 value;
+    public T2 value2;
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        //类型占位符T可以用任意数据类型代替，这样就实现了类型的参数化
+        TestClass<int> t = new TestClass<int>();
+        t.value = 10;
+
+        TestClass<string> t2 = new TestClass<string>();
+        t2.value = "hello world";
+
+        TestClass<int, string> t3 = new TestClass<int, string>();
+        t3.value = 10;
+        t3.value2 = "111";
+    }
+}
+```
+
+#### 泛型接口
+
+```csharp
+#region 泛型接口
+interface TestInterface<T>
+{
+    //接口只能有属性、方法、事件、索引器
+    T value { get; set; }
+}
+//在类中实现接口，因为是实现，所以必须在<>内注明数据类型
+class Test : TestInterface<int>
+{
+    public int value { get; set; }
+}
+#endregion
+```
+
+#### 泛型方法(函数)
+
+> 不确定泛型类型的时候可以用default(T)来获取默认值，然后在后面写函数逻辑
+
+```csharp
+#region 普通类中的泛型方法
+class Test2
+{
+    public void TestFunc<T>(T value)
+    {
+        Console.WriteLine(value);
+    }
+    //无参
+    public void TestFunc<T>()
+    {
+        T t = default(T);
+        Console.WriteLine("{0}类型的默认值是{1}", typeof(T), t);
+    }
+    //占位符作为返回值类型
+    public T TestFunc<T>(string v)
+    {
+        return default(T);
+    }
+    //多个占位符
+    public void TestFunc<T, T2>(T v1, T2 v2)
+    {
+
+    }
+}
+#endregion
+class Program
+{
+    static void Main(string[] args)
+    {
+        //泛型方法
+        Test2 t4 = new Test2();
+        t4.TestFunc<int>(10);
+        t4.TestFunc<string>("hello world");
+        t4.TestFunc<double>();
+        Console.WriteLine(t4.TestFunc<int>("1"));
+    }
+}
+```
+
+#### 泛型类中的泛型方法
+
+```csharp
+#region 泛型类中的泛型方法
+class Test2<T>
+{
+    public T value;
+    //函数名后没有<>，不是泛型方法
+    // 调用函数的时候，参数类型T已经被类的T定死，无法重新指定其数据类型
+    public void TestFunc(T v)
+    {
+
+    }
+    //函数名后有<>，才是泛型方法
+    // 括号里的参数类型T只与该函数的<T>一致，和类的T无关
+    public void TestFunc<T>(T v)
+    {
+
+    }
+}
+#endregion
+class Program
+{
+    static void Main(string[] args)
+    {
+        //泛型类中的泛型方法
+        Test2<int> t5 = new Test2<int>();
+        t5.TestFunc<int>(10);
+        t5.TestFunc<string>("hello world");
+        t5.TestFunc("111"); //编译器会自动推算出T的类型为string，但最好写上，不然可读性不高
+    }
+}
+```
+
+> 习题
+
+![1749802246428](image/CSharp_advanced/1749802246428.png)
+
+```csharp
+namespace 泛型习题;
+
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine(Test<int>());
+    }
+
+    static string Test<T>()
+    {
+
+        if (typeof(T) == typeof(int))
+        {
+            return String.Format("{0},{1}字节", typeof(T), sizeof(int));
+        }
+        else if (typeof(T) == typeof(double))
+        {
+            return String.Format("{0},{1}字节", typeof(T), sizeof(double));
+        }
+        else if (typeof(T) == typeof(float))
+        {
+            return String.Format("{0},{1}字节", typeof(T), sizeof(float));
+        }
+        else if (typeof(T) == typeof(char))
+        {
+            return String.Format("{0},{1}字节", typeof(T),sizeof(char));
+        }
+        else if (typeof(T) == typeof(string))
+        {
+            return String.Format("{0}", typeof(T));
+        }
+        else
+        {
+            return String.Format("其他类型");
+        }
+    }
+}
+
+```
 
 ### 泛型类和泛型接口
+
 
 ### 泛型方法
 
