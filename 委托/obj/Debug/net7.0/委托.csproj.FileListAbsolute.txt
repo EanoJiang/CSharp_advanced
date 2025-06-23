@@ -1,0 +1,14 @@
+/Users/User/Desktop/CSharp/CSharp_advanced/委托/bin/Debug/net7.0/委托
+/Users/User/Desktop/CSharp/CSharp_advanced/委托/bin/Debug/net7.0/委托.deps.json
+/Users/User/Desktop/CSharp/CSharp_advanced/委托/bin/Debug/net7.0/委托.runtimeconfig.json
+/Users/User/Desktop/CSharp/CSharp_advanced/委托/bin/Debug/net7.0/委托.dll
+/Users/User/Desktop/CSharp/CSharp_advanced/委托/bin/Debug/net7.0/委托.pdb
+/Users/User/Desktop/CSharp/CSharp_advanced/委托/obj/Debug/net7.0/委托.GeneratedMSBuildEditorConfig.editorconfig
+/Users/User/Desktop/CSharp/CSharp_advanced/委托/obj/Debug/net7.0/委托.AssemblyInfoInputs.cache
+/Users/User/Desktop/CSharp/CSharp_advanced/委托/obj/Debug/net7.0/委托.AssemblyInfo.cs
+/Users/User/Desktop/CSharp/CSharp_advanced/委托/obj/Debug/net7.0/委托.csproj.CoreCompileInputs.cache
+/Users/User/Desktop/CSharp/CSharp_advanced/委托/obj/Debug/net7.0/委托.dll
+/Users/User/Desktop/CSharp/CSharp_advanced/委托/obj/Debug/net7.0/refint/委托.dll
+/Users/User/Desktop/CSharp/CSharp_advanced/委托/obj/Debug/net7.0/委托.pdb
+/Users/User/Desktop/CSharp/CSharp_advanced/委托/obj/Debug/net7.0/委托.genruntimeconfig.cache
+/Users/User/Desktop/CSharp/CSharp_advanced/委托/obj/Debug/net7.0/ref/委托.dll

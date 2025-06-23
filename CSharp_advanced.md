@@ -867,22 +867,861 @@ class Program
 
 ```
 
-### 泛型类和泛型接口
-
-
-### 泛型方法
-
-### 泛型的作用
-
-### 总结
-
 ## 泛型约束
 
-# 常用泛型数据结构类
+### 泛型约束的基本概念
+
+`where 泛型字母:(约束的类型)`
+
+* 让泛型的类型有一定限制
+* 关键字：`where`
+* 泛型约束一共有6种
+
+### 各泛型约束
+
+| 值类型                        | `where 泛型字母:struct`     |
+| :---------------------------- | :---------------------------- |
+| 引用类型                      | where 泛型字母:class          |
+| 存在无参公共构造函数          | where 泛型字母:new()          |
+| 类本身/子类                   | where 泛型字母:类名           |
+| 接口本身/接口的子类           | where 泛型字母:接口名         |
+| 另一个泛型类型本身/其派生类型 | where 泛型字母:另一个泛型字母 |
+
+```csharp
+namespace 泛型约束;
+#region 各个泛型类型约束
+//值类型约束
+class Test1<T> where T : struct
+{
+    public T value;
+    public void TestFunc<K>(K v) where K : struct
+    {
+
+    }
+}
+
+//引用类型约束
+class Test2<T> where T : class
+{
+    public T value;
+    public void TestFunc<K>(K v) where K : class
+    {
+
+    }
+}
+
+//公共无参构造约束
+class Test3<T> where T : new()
+{
+    public T value;
+    public void TestFunc<K>(K v) where K : new()
+    {
+
+    }
+}
+class Test1
+{
+
+}
+class Test2
+{
+    public Test2(int a)
+    {
+
+    }
+}
+class Test3
+{
+    private Test3()
+    {
+
+    }
+}
+abstract class Test4
+{
+
+}
+
+//类约束：某个类本身或其子类
+class Test4<T> where T : Test1
+{
+    public T value;
+    public void TestFunc<K>(K v) where K : Test1
+    {
+
+    }
+}
+class Test1_ : Test1
+{
+
+}
+
+//接口约束：某个接口或者其子接口或其子类
+interface IFly
+{
+
+}
+interface IMove : IFly
+{
+  
+}
+class Test6 : IFly
+{
+  
+}
+class Test5<T> where T : IFly
+{
+    public T value;
+}
+
+//另一个泛型约束
+//前者必须是后者本身或其派生类型
+class Test7<T, U> where T : U
+{
+    public T value;
+    public void TestFunc<K, V>(K k) where K : V
+    {
+
+    }
+}
+
+
+#endregion
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        //值类型
+        Test1<int> t = new Test1<int>();
+        t.TestFunc<bool>(true);
+        // Test1<object> t2 = new Test1<object>();  错误
+
+        //引用类型
+        Test2<string> t2 = new Test2<string>();
+        t2.TestFunc<object>(new object());
+
+        //无参公共构造函数
+        Test3<Test1> t3 = new Test3<Test1>();
+        // Test3<Test2> t3 = new Test3<Test2>();    错误，必须要有无参公共构造函数
+        // Test3<Test3> t3 = new Test3<Test3>();    错误，必须要有无参公共构造函数
+        // Test3<Test4> t3 = new Test3<Test4>();    错误，抽象类不行，因为抽象类不能new对象，只能在子类继承
+        Test3<int> t4 = new Test3<int>();   //正确,所有的值类型实际上都默认有一个无参构造
+
+        //类约束：某个类本身或其子类
+        Test4<Test1> t5 = new Test4<Test1>();
+        t5.TestFunc<Test1>(new Test1());
+        //Test1_是Test1的子类
+        Test4<Test1_> t6 = new Test4<Test1_>();
+
+        //接口约束
+        //接口本身
+        Test5<IFly> t7 = new Test5<IFly>();
+        t7.value = new Test6();
+        //接口的实现类(子类)
+        Test5<Test6> t8 = new Test5<Test6>();
+        //接口的子接口
+        Test5<IMove> t9 = new Test5<IMove>();
+
+        //另一个泛型约束
+        //同一类型
+        Test7<int, int> t10 = new Test7<int, int>();
+        Test7<Test1, Test1> t11 = new Test7<Test1, Test1>();
+        //前是后的派生类型
+        Test7<Test1_, Test1> t12 = new Test7<Test1_, Test1>();
+        Test7<Test6, IFly> t13 = new Test7<Test6, IFly>();
+
+    }
+}
+
+```
+
+### 约束的组合使用
+
+用 `逗号`连接两个约束，相当于多个约束条件
+
+注意：
+
+* 但不是每个都能组合起来使用，看报错
+* new()一般写在最后
+
+```csharp
+#region 约束的组合使用
+//同时是引用类型且必须有无参构造函数
+class Test8<T> where T : class, new()
+{
+
+}
+class Test8_
+{
+  
+}
+#endregion
+```
+
+```csharp
+        #region 约束的组合使用
+        Test8<Test8_> t14 = new Test8<Test8_>();
+  
+        #endregion
+```
+
+### 多个泛型有约束
+
+每个泛型字母都要对应一个 `where`
+
+```csharp
+#region 多个泛型有约束
+class Test9<T,U> where T : class, new() where U : struct
+{
+
+}
+#endregion
+```
+
+> 习题
+
+![1750478791617](image/CSharp_advanced/1750478791617.png)
+
+```csharp
+namespace 泛型约束习题;
+
+//1. 泛型实现单例模式
+class SingleBase<T> where T : new()
+{
+    private static T _instance = new T();
+    public static T Instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
+}
+
+class Test : SingleBase<Test>
+{
+  
+}
+
+//2. 泛型实现一个不确定类型的ArrayList
+class ArrayList<T>
+{
+    private T[] array;
+    public void Add(T value)
+    {
+        //...
+    }
+    public void RemoveAt(int index)
+    {
+        //...
+    }
+    public void Remove(T value)
+    {
+        //...
+    }
+    public T this[int index]
+    {
+        get
+        {
+            return array[index];
+        }
+        set
+        {
+            array[index] = value;
+        }
+    }
+}
+
+```
+
+# 常用泛型数据结构类型
+
+## List——列表，泛型ArrayList
+
+本质：一个可变类型的泛型数组，也就是泛型实现的ArrayList
+
+类型在申明时就确定好，所以不存在装箱拆箱
+
+### List的申明
+
+```csharp
+using System.Collections.Generic;
+
+//申明
+List<int> list = new List<int>();
+```
+
+### List的增删查改遍历
+
+和ArrayList一样
+
+```csharp
+using System.Collections.Generic;
+
+//申明
+List<int> list = new List<int>();
+
+//增删查改
+
+#region 增
+//单个加
+list.Add(1);
+list.Add(2);
+
+List<int> list2 = new List<int>();
+list2.Add(1);
+//范围加
+list.AddRange(list2);
+//在指定位置插入
+list.Insert(0, 999);
+#endregion
+
+#region 删
+//移除指定元素
+list.Remove(1);
+//移除指定位置元素
+list.RemoveAt(0);
+//清空
+list.Clear();
+#endregion
+
+list.Add(1);
+list.Add(2);
+list.Add(3);
+
+#region 查
+//得到指定位置元素
+Console.WriteLine(list[0]);
+//元素是否存在
+Console.WriteLine(list.Contains(1));
+//正向查找元素位置
+//找不到返回-1
+Console.WriteLine(list.IndexOf(1));
+Console.WriteLine(list.IndexOf(0));
+//反向查找元素位置,返回的也是从左往右数的位置，只是从末尾开始遍历
+//找不到返回-1
+Console.WriteLine(list.LastIndexOf(1));
+Console.WriteLine(list.LastIndexOf(0));
+#endregion
+
+#region 改
+list[0] = 999;
+
+#endregion
+
+Console.WriteLine();
+#region 遍历
+Console.WriteLine(list.Count);
+Console.WriteLine(list.Capacity);
+for (int i = 0; i < list.Count; i++)
+{
+    Console.WriteLine(list[i]);
+}
+foreach (var item in list)
+{
+    Console.WriteLine(item);
+}
+#endregion
+```
+
+### List和ArrayList的区别
+
+List就是在申明时就确定好类型的ArrayList
+
+|          | List                         | ArrayList  |
+| -------- | ---------------------------- | ---------- |
+| 内部封装 | 泛型数组<br />不存在装箱拆箱 | object数组 |
+
+## Dictionary——字典，泛型哈希表
+
+本质：泛型实现的Hashtable，也是基于键的哈希代码组织起来的键值对
+
+键值对的类型在申明时就确定好，所以不存在装箱拆箱
+
+### Dictionary的申明
+
+```csharp
+using System.Collections.Generic;
+
+//申明
+Dictionary<int, string> dictionary = new Dictionary<int, string>();
+```
+
+### Dictionary的增删查改遍历
+
+```csharp
+using System.Collections.Generic;
+
+//申明
+Dictionary<int, string> dictionary = new Dictionary<int, string>();
+
+//增删查改
+
+#region 增
+dictionary.Add(1, "111");
+dictionary[2] = "222";
+#endregion
+
+#region 删
+//1.通过键删除
+//删除不存在的键，不报错
+dictionary.Remove(1);
+//2.清空
+dictionary.Clear();
+#endregion
+
+dictionary.Add(1, "111");
+dictionary.Add(2, "222");
+dictionary.Add(3, "333");
+
+#region 查
+//1.通过键查询
+//找不到键就报错，不返回空
+Console.WriteLine(dictionary[1]);
+//2.查看是否存在
+//根据key
+Console.WriteLine(dictionary.ContainsKey(1));  
+//根据value
+Console.WriteLine(dictionary.ContainsValue("222"));
+#endregion
+
+#region 改
+dictionary[2] = "9999";
+#endregion
+
+//遍历
+Console.WriteLine(dictionary.Count);
+//一起遍历
+foreach (var item in dictionary)
+{
+    Console.WriteLine(item.Key + ":" + item.Value);
+}
+foreach (KeyValuePair<int,string> item in dictionary)
+{
+    Console.WriteLine(item);
+}
+//遍历key
+foreach (var item in dictionary.Keys)
+{
+    Console.WriteLine(item);
+}
+//遍历value
+foreach (var item in dictionary.Values)
+{
+    Console.WriteLine(item);
+}
+```
+
+## 顺序存储和链式存储
+
+顺序结构：数组、ArrayList、Stack、Queue、List
+
+链式结构：链表(单向、双向、循环)
+
+## LinkedList——泛型双向链表
+
+本质：一个可变类型的**泛型双向链表**
+
+链表的节点类LinkedListNode `<T>`
+
+![1750594295627](image/CSharp_advanced/1750594295627.png)
+
+### LinkedList申明
+
+```csharp
+//申明
+LinkedList<int> linkedList = new LinkedList<int>();
+LinkedList<string> linkedList2 = new LinkedList<string>();
+```
+
+### LinkedList的增删查改和遍历
+
+```csharp
+//申明
+LinkedList<int> linkedList = new LinkedList<int>();
+LinkedList<string> linkedList2 = new LinkedList<string>();
+
+//增删查改
+#region 增
+//头插
+linkedList.AddFirst(1);
+//尾插
+linkedList.AddLast(99);
+//在指定节点后插入
+LinkedListNode<int> n = linkedList.Find(1);
+linkedList.AddAfter(n, 2);
+//在指定节点前插入
+linkedList.AddBefore(n, 0);
+
+#endregion
+
+#region 删
+//删除头节点
+linkedList.RemoveFirst();
+//删除尾节点
+linkedList.RemoveLast();
+//删除指定值的节点
+//无法通过位置删除，因为链表没有办法直接获取索引
+linkedList.Remove(99);
+//清空
+linkedList.Clear();
+#endregion
+
+linkedList.AddLast(1);
+linkedList.AddLast(2);
+
+#region 查
+//获取头节点
+LinkedListNode<int> first = linkedList.First;
+//获取尾节点
+LinkedListNode<int> last = linkedList.Last;
+//获取指定值的节点
+LinkedListNode<int> node = linkedList.Find(1);
+Console.WriteLine(node.Value);
+//判断是否存在
+Console.WriteLine(linkedList.Contains(1));
+#endregion
+
+#region 改
+Console.WriteLine(node.Value);
+node.Value = 3;
+Console.WriteLine(node.Value);
+#endregion
+
+#region 遍历
+//迭代器
+foreach (var item in linkedList)
+{
+    Console.WriteLine(item);
+}
+//通过节点遍历：因为本质是双向链表，所以存在正序和倒序遍历
+//1.正序遍历
+LinkedListNode<int> nowNode = linkedList.First;
+while (nowNode != null)
+{
+    Console.WriteLine(nowNode.Value);
+    nowNode = nowNode.Next;
+}
+//2.倒序遍历
+nowNode = linkedList.Last;
+while (nowNode != null)
+{
+    Console.WriteLine(nowNode.Value);
+    nowNode = nowNode.Previous;
+}
+#endregion
+```
+
+## 泛型栈和队列
+
+前面介绍栈和队列的时候有**装箱拆箱**的问题，在其解决方法中我已提过引入泛型来解决
+
+### 泛型栈
+
+`Stack `
+
+```csharp
+Stack<int> stack = new Stack<int>();
+```
+
+### 泛型队列
+
+`Queue <T> queue`
+
+```csharp
+Queue<int> queue = new Queue<int>();
+```
+
+其内置方法和之前的栈和队列完全一样
+
+# 总结：上述各种数据容器的适用场景
+
+> 数组、List、Dictionary, Stack, Queue, LinkedList
+
+| 数据结构            | 类型       | 特点                                        | 适用场景                                                            |
+| ------------------- | ---------- | ------------------------------------------- | ------------------------------------------------------------------- |
+| `数组`            | 固定长度   | 连续内存存储，支持下标访问，性能高          | 数据量固定、频繁通过下标访问的场景                                  |
+| `List<T>`         | 动态数组   | 可变长度，支持下标访问，插入/删除效率较低   | 需要频繁修改内容但又需要通过索引快速查找的场景                      |
+| `LinkedList<T>`   | 双向链表   | 插入/删除效率高，不支持下标访问             | 不确定长度，频繁在中间插入或删除元素的场景                          |
+| `Stack<T>`        | 后进先出   | 入栈（Push）、出栈（Pop）、查看栈顶（Peek） | 实现递归算法、撤销/重做机制、UI面板显隐规则等                       |
+| `Queue<T>`        | 先进先出   | 入队（Enqueue）、出队（Dequeue）            | 消息队列、任务调度、事件处理等需按顺序处理的场景                    |
+| `Dictionary<K,V>` | 键值对集合 | 快速通过键查找值，不允许重复键              | 存储具有唯一标识的数据，如**ID-对象映射**、配置项、资源管理等 |
 
 # 委托和事件
 
-# List排序
+## 委托
+
+委托是专门**装载函数**的容器，也就是函数的变量类型
+
+用来存储、传递函数
+
+**本质**：**是一个类**，用来定义函数的类型（返回值和参数的类型）
+
+不同的函数对应和各自**“格式"一致的委托**
+
+### 委托的申明和使用
+
+**关键字**：`delegate`
+
+位置：nameplace、class语句块中，一般写在nameplace中
+
+访问修饰符：一般用public，默认不写就是public
+
+**语法**：`访问修饰符 delegate 返回值 委托名(参数列表)`
+
+```csharp
+namespace 委托;
+//委托的申明，统一语句块中不能重名
+delegate void MyFunc();
+public delegate int MyFunc2(int a);
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        //委托是专门装载函数的容器
+        //把格式一样(无参无返回值)的方法Fun装进了MyFunc的对象f里面
+        //两种存放写法
+        MyFunc f = new MyFunc(Fun);
+        MyFunc f2 = Fun;
+
+        //调用委托对象f存放的方法
+        //两种调用写法
+        f.Invoke();
+        f2();
+
+        //注意：格式必须一样才能装载
+        MyFunc2 f3 = new MyFunc2(Fun2);
+        Console.WriteLine(f3(1));
+
+    }
+
+    static void Fun()
+    {
+        Console.WriteLine("Fun");
+    }
+    static int Fun2(int value)
+    {
+        return value;
+    }
+}
+
+```
+
+### 泛型委托
+
+```csharp
+//泛型委托
+delegate T MyFunc3<T, K>(T t, K k);
+```
+
+### 使用定义好的委托——观察者设计模式
+
+```csharp
+#region 使用定义好的委托
+//委托常用在：
+//1.作为类的成员
+//2.作为函数的参数
+class Test
+{
+    public MyFunc func;
+    public MyFunc2 func2;
+    public void TestFunc(MyFunc func, MyFunc2 func2)
+    {
+        //观察者设计模式
+        //先处理一些逻辑，后 存放/延迟执行 传入的函数
+        int i = 0;
+        i++;
+
+        //延迟执行传入的函数
+        //func();
+        //func2(i);
+
+        //存放传入的函数
+        this.func = func;
+        this.func2 = func2;
+    }
+}
+#endregion
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        #region 使用定义好的委托
+        Test t = new Test();
+        t.TestFunc(Fun, Fun2);
+        #endregion
+    }
+
+    static void Fun()
+    {
+        Console.WriteLine("Fun");
+    }
+    static int Fun2(int value)
+    {
+        return value;
+    }
+}
+```
+
+### 委托变量存储多个函数——加、减、清空
+
+```csharp
+class Test
+{
+    public MyFunc func;
+    public MyFunc2 func2;
+    public void TestFunc(MyFunc func, MyFunc2 func2)
+    {
+        //观察者设计模式
+        //先处理一些逻辑，后 存放/延迟执行 传入的函数
+        int i = 0;
+        i++;
+
+        //延迟执行传入的函数
+        //func();
+        //func2(i);
+
+        //存放传入的函数
+        this.func = func;
+        this.func2 = func2;
+    }
+    #region 委托变量存储多个函数
+    //同样，需要格式一致才能装载
+    //增    +=
+    public void AddFunc(MyFunc func, MyFunc2 func2)
+    {
+        this.func += func;
+        this.func2 += func2;
+    }
+
+    //删    -=
+    public void RemoveFunc(MyFunc func, MyFunc2 func2)
+    {
+        this.func -= func;
+        this.func2 -= func2;
+    }   
+    #endregion
+}
+```
+
+```csharp
+        #region 委托变量存储多个函数
+        //同样，需要格式一致才能装载
+
+        //增    +=
+        // MyFunc ff = Fun;
+        // ff += Fun3;
+        // ff();
+
+        //或者：先赋值为null，再+=
+        MyFunc ff = null;
+        ff += Fun;
+        ff += Fun3;
+        ff();
+
+        t.AddFunc(Fun, Fun2);
+        t.func();
+
+        //删    -=
+        ff -= Fun;
+        //多删不会报错
+        ff -= Fun;
+        ff();
+        ff -= Fun3;
+        //删完会报错
+        // ff();     删完，ff为null，调用会报错
+        //清空委托容器
+        // ff = null;
+        if (ff != null) ff();
+
+        #endregion
+
+```
+
+### 系统定义好的委托
+
+```csharp
+        #region 系统定义好的委托容器
+        //无参无返回 —— Action
+        Action action = Fun;
+        action += Fun3;
+        action();
+        //n个参数无返回，最多支持传入16个参数 —— Action<T1,T2,T3...T16>
+        Action<int, string> actions = Fun6;
+        actions(1, "111");
+
+        //无参有返回的泛型委托 —— Func<T>
+        Func<string> funcString = Fun4;
+        Func<int> funcInt = Fun5;
+        //n个参数有返回，最多支持传入16个参数 —— Func<T1,T2,T3...T16,TResult>
+        //注意：参数的类型写前面，返回值的类型写后面
+        Func<int, string> funcs = Fun7; //参数是int，返回值是string
+        #endregion
+
+```
+
+```csharp
+    static void Fun()
+    {
+        Console.WriteLine("这是Fun方法");
+    }
+    static void Fun3()
+    {
+        Console.WriteLine("这是Fun3方法");
+    }
+    static int Fun2(int value)
+    {
+        return value;
+    }
+    static string Fun4()
+    {
+        return "这是Fun4方法";
+    }
+    static int Fun5()
+    {
+        return 5;
+    }
+    static void Fun6(int value, string value2)
+    {
+
+    }
+    static string Fun7(int value)
+    {
+        return "这是Fun7方法";
+    }
+
+```
+
+> 习题
+
+![1750607172763](image/CSharp_advanced/1750607172763.png)
+
+后面再来做题巩固
+
+## 事件
+
+事件是委托的安全包裹，让委托的使用更加安全
+
+这是一种特殊的变量类型
+
+**申明语法**：`访问修饰符 event 委托类型 事件名`
+
+作用：
+
+1. 作为成员变量存在于类、接口、结构体中
+2. 委托怎么用，事件就怎么用
+
+**事件和委托的区别**：事件不能在类的外部赋值、调用
+
+
+## 匿名函数
+
+
+## Lambda表达式
+
 
 # 协变逆变
 
