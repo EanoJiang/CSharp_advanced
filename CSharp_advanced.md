@@ -1,19 +1,22 @@
+
+# C#进阶篇
+
 ![1748674622387](https://img2023.cnblogs.com/blog/3614909/202506/3614909-20250605203740579-1632264547.png)
 
-# 简单数据结构类
+## 简单数据结构类
 
-## ArrayList
+### ArrayList
 
 Object类型的数组
 
-### 申明
+#### 申明
 
 ```csharp
         //ArrayList的申明
         ArrayList arr1 = new ArrayList();
 ```
 
-### 增删查改
+#### 增删查改
 
 ```csharp
         //增删查改
@@ -78,7 +81,7 @@ Object类型的数组
 
 ```
 
-### 排序和反转
+#### 排序和反转
 
 和数组一样
 
@@ -87,7 +90,7 @@ arr1.Sort();
 arr1.Reverse();
 ```
 
-### 装箱拆箱
+#### 装箱拆箱
 
 ```csharp
         #region 装箱拆箱
@@ -103,7 +106,7 @@ arr1.Reverse();
         #endregion
 ```
 
-### ArrayList和数组的区别
+#### ArrayList和数组的区别
 
 ArrayList本质是object数组
 
@@ -262,13 +265,13 @@ class Program
 }
 ```
 
-## Stack
+### Stack
 
 本质是object[]数组
 
 栈储存容器，后进先出
 
-### 栈的使用
+#### 栈的使用
 
 ```csharp
 using System.Collections;
@@ -330,7 +333,7 @@ class Test
 
 ```
 
-### 栈的装箱拆箱
+#### 栈的装箱拆箱
 
 因为栈的本质还是object[]数组
 
@@ -359,7 +362,7 @@ stack.Push(100);
 int value = stack.Pop();  // 直接获取 int，无需拆箱
 ```
 
-### 栈的应用
+#### 栈的应用
 
 UI的显示逻辑(每次点击的面板总是显示在最前面)
 
@@ -396,11 +399,11 @@ static void DecToBinary(uint num)
 
 ```
 
-## Queue
+### Queue
 
 本质是object[]数组，先进先出，类似管道
 
-### 队列的使用
+#### 队列的使用
 
 ```csharp
 using System.Collections;
@@ -449,7 +452,7 @@ class Test
 }
 ```
 
-### 队列的装箱拆箱
+#### 队列的装箱拆箱
 
 ```csharp
 //装箱
@@ -480,7 +483,7 @@ while (queue.Count > 0)
 }
 ```
 
-## Hashtable
+### Hashtable
 
 哈希表/散列表，本质是一个字典
 
@@ -488,7 +491,7 @@ while (queue.Count > 0)
 
 用键来访问集合中的元素
 
-### 哈希表的使用
+#### 哈希表的使用
 
 ```csharp
 using System.Collections;
@@ -561,7 +564,7 @@ while (flag)
 >
 > foreach**底层调用的就是 `GetEnumerator()`**
 
-### 哈希表的装箱拆箱
+#### 哈希表的装箱拆箱
 
 本质是object容器，字典，所以必然存在装箱拆箱
 
@@ -663,9 +666,9 @@ class Monster
 
 ![1749125014286](https://img2023.cnblogs.com/blog/3614909/202506/3614909-20250605203747854-1426239643.png)
 
-# 泛型
+## 泛型
 
-## 泛型的基本概念
+### 泛型的基本概念
 
 * 泛型实现了**类型参数化**，用于代码复用
 * 通过类型参数化来实现在同一份代码上操作多种类型
@@ -674,15 +677,15 @@ class Monster
 * **当真正使用类和方法时再具体制定类型**
 * 泛型占位符一般用大写字母
 
-### 泛型的作用
+#### 泛型的作用
 
 1. 不同类型对象的相同逻辑处理，可以选择泛型，提升代码的复用
 2. 使用泛型，可以一定程度**避免装箱拆箱**
 3. eg：自己写泛型类ArrayList `<T>`来解决ArrayList存在的装箱拆箱问题、Stack `<Type>`、Queue `<Type>`、用字典 `Dictionary<T1,T2>`实现Hashtable
 
-### 泛型分类
+#### 泛型分类
 
-#### 语法
+##### 语法
 
 泛型类：		class 类名<泛型占位字母>
 
@@ -692,7 +695,7 @@ class Monster
 
 泛型占位字母可以有多个，用逗号隔开
 
-#### 泛型类
+##### 泛型类
 
 ```csharp
 class TestClass<T>
@@ -725,7 +728,7 @@ class Program
 }
 ```
 
-#### 泛型接口
+##### 泛型接口
 
 ```csharp
 #region 泛型接口
@@ -742,7 +745,7 @@ class Test : TestInterface<int>
 #endregion
 ```
 
-#### 泛型方法(函数)
+##### 泛型方法(函数)
 
 > 不确定泛型类型的时候可以用default(T)来获取默认值，然后在后面写函数逻辑
 
@@ -786,7 +789,7 @@ class Program
 }
 ```
 
-#### 泛型类中的泛型方法
+##### 泛型类中的泛型方法
 
 ```csharp
 #region 泛型类中的泛型方法
@@ -822,7 +825,7 @@ class Program
 
 > 习题
 
-![1749802246428](image/CSharp_advanced/1749802246428.png)
+![1749802246428](https://img2023.cnblogs.com/blog/3614909/202506/3614909-20250623014931577-99512411.png)
 
 ```csharp
 namespace 泛型习题;
@@ -867,9 +870,9 @@ class Program
 
 ```
 
-## 泛型约束
+### 泛型约束
 
-### 泛型约束的基本概念
+#### 泛型约束的基本概念
 
 `where 泛型字母:(约束的类型)`
 
@@ -877,7 +880,7 @@ class Program
 * 关键字：`where`
 * 泛型约束一共有6种
 
-### 各泛型约束
+#### 各泛型约束
 
 | 值类型                        | `where 泛型字母:struct`     |
 | :---------------------------- | :---------------------------- |
@@ -1036,7 +1039,7 @@ class Program
 
 ```
 
-### 约束的组合使用
+#### 约束的组合使用
 
 用 `逗号`连接两个约束，相当于多个约束条件
 
@@ -1066,7 +1069,7 @@ class Test8_
         #endregion
 ```
 
-### 多个泛型有约束
+#### 多个泛型有约束
 
 每个泛型字母都要对应一个 `where`
 
@@ -1081,7 +1084,7 @@ class Test9<T,U> where T : class, new() where U : struct
 
 > 习题
 
-![1750478791617](image/CSharp_advanced/1750478791617.png)
+![1750478791617](https://img2023.cnblogs.com/blog/3614909/202506/3614909-20250623014933068-890493494.png)
 
 ```csharp
 namespace 泛型约束习题;
@@ -1135,15 +1138,15 @@ class ArrayList<T>
 
 ```
 
-# 常用泛型数据结构类型
+## 常用泛型数据结构类型
 
-## List——列表，泛型ArrayList
+### List——列表，泛型ArrayList
 
 本质：一个可变类型的泛型数组，也就是泛型实现的ArrayList
 
 类型在申明时就确定好，所以不存在装箱拆箱
 
-### List的申明
+#### List的申明
 
 ```csharp
 using System.Collections.Generic;
@@ -1152,7 +1155,7 @@ using System.Collections.Generic;
 List<int> list = new List<int>();
 ```
 
-### List的增删查改遍历
+#### List的增删查改遍历
 
 和ArrayList一样
 
@@ -1225,7 +1228,7 @@ foreach (var item in list)
 #endregion
 ```
 
-### List和ArrayList的区别
+#### List和ArrayList的区别
 
 List就是在申明时就确定好类型的ArrayList
 
@@ -1233,13 +1236,13 @@ List就是在申明时就确定好类型的ArrayList
 | -------- | ---------------------------- | ---------- |
 | 内部封装 | 泛型数组<br />不存在装箱拆箱 | object数组 |
 
-## Dictionary——字典，泛型哈希表
+### Dictionary——字典，泛型哈希表
 
 本质：泛型实现的Hashtable，也是基于键的哈希代码组织起来的键值对
 
 键值对的类型在申明时就确定好，所以不存在装箱拆箱
 
-### Dictionary的申明
+#### Dictionary的申明
 
 ```csharp
 using System.Collections.Generic;
@@ -1248,7 +1251,7 @@ using System.Collections.Generic;
 Dictionary<int, string> dictionary = new Dictionary<int, string>();
 ```
 
-### Dictionary的增删查改遍历
+#### Dictionary的增删查改遍历
 
 ```csharp
 using System.Collections.Generic;
@@ -1313,21 +1316,21 @@ foreach (var item in dictionary.Values)
 }
 ```
 
-## 顺序存储和链式存储
+### 顺序存储和链式存储
 
 顺序结构：数组、ArrayList、Stack、Queue、List
 
 链式结构：链表(单向、双向、循环)
 
-## LinkedList——泛型双向链表
+### LinkedList——泛型双向链表
 
 本质：一个可变类型的**泛型双向链表**
 
 链表的节点类LinkedListNode `<T>`
 
-![1750594295627](image/CSharp_advanced/1750594295627.png)
+![1750594295627](https://img2023.cnblogs.com/blog/3614909/202506/3614909-20250623014934295-596253269.png)
 
-### LinkedList申明
+#### LinkedList申明
 
 ```csharp
 //申明
@@ -1335,7 +1338,7 @@ LinkedList<int> linkedList = new LinkedList<int>();
 LinkedList<string> linkedList2 = new LinkedList<string>();
 ```
 
-### LinkedList的增删查改和遍历
+#### LinkedList的增删查改和遍历
 
 ```csharp
 //申明
@@ -1413,11 +1416,11 @@ while (nowNode != null)
 #endregion
 ```
 
-## 泛型栈和队列
+### 泛型栈和队列
 
 前面介绍栈和队列的时候有**装箱拆箱**的问题，在其解决方法中我已提过引入泛型来解决
 
-### 泛型栈
+#### 泛型栈
 
 `Stack `
 
@@ -1425,7 +1428,7 @@ while (nowNode != null)
 Stack<int> stack = new Stack<int>();
 ```
 
-### 泛型队列
+#### 泛型队列
 
 `Queue <T> queue`
 
@@ -1435,7 +1438,7 @@ Queue<int> queue = new Queue<int>();
 
 其内置方法和之前的栈和队列完全一样
 
-# 总结：上述各种数据容器的适用场景
+## 总结：上述各种数据容器的适用场景
 
 > 数组、List、Dictionary, Stack, Queue, LinkedList
 
@@ -1448,9 +1451,9 @@ Queue<int> queue = new Queue<int>();
 | `Queue<T>`        | 先进先出   | 入队（Enqueue）、出队（Dequeue）            | 消息队列、任务调度、事件处理等需按顺序处理的场景                    |
 | `Dictionary<K,V>` | 键值对集合 | 快速通过键查找值，不允许重复键              | 存储具有唯一标识的数据，如**ID-对象映射**、配置项、资源管理等 |
 
-# 委托和事件
+## 委托和事件
 
-## 委托
+### 委托
 
 委托是专门**装载函数**的容器，也就是函数的变量类型
 
@@ -1460,7 +1463,7 @@ Queue<int> queue = new Queue<int>();
 
 不同的函数对应和各自**“格式"一致的委托**
 
-### 委托的申明和使用
+#### 委托的申明和使用
 
 **关键字**：`delegate`
 
@@ -1509,14 +1512,14 @@ class Program
 
 ```
 
-### 泛型委托
+#### 泛型委托
 
 ```csharp
 //泛型委托
 delegate T MyFunc3<T, K>(T t, K k);
 ```
 
-### 使用定义好的委托——观察者设计模式
+#### 使用定义好的委托——观察者设计模式
 
 ```csharp
 #region 使用定义好的委托
@@ -1566,7 +1569,7 @@ class Program
 }
 ```
 
-### 委托变量存储多个函数——加、减、清空
+#### 委托变量存储多个函数——加、减、清空
 
 ```csharp
 class Test
@@ -1641,7 +1644,7 @@ class Test
 
 ```
 
-### 系统定义好的委托
+#### 系统定义好的委托
 
 ```csharp
         #region 系统定义好的委托容器
@@ -1697,11 +1700,12 @@ class Test
 
 > 习题
 
-![1750607172763](image/CSharp_advanced/1750607172763.png)
+![1751296379510](image/CSharp_advanced/1751296379510.png)
 
 后面再来做题巩固
 
-## 事件
+
+### 事件
 
 事件是委托的安全包裹，让委托的使用更加安全
 
@@ -1714,27 +1718,376 @@ class Test
 1. 作为成员变量存在于类、接口、结构体中
 2. 委托怎么用，事件就怎么用
 
-**事件和委托的区别**：事件不能在类的外部赋值、调用
+**事件和委托的区别**：事件不能在类的外部赋值、调用，**只能在内部封装起来调用，所以更安全**
+
+#### 事件的申明
+
+```
+    //委托的申明
+    public Action myFun;
+    //事件的申明
+    public event Action myEvent;
+```
+
+#### 事件的使用
+
+```csharp
+namespace 事件;
+
+class Test
+{
+    //委托的申明
+    public Action myFun;
+    //事件的申明
+    public event Action myEvent;
+
+    public Test()
+    {
+        //二者使用完全一样
+        myFun = TestFun;
+        myFun += TestFun;
+        myFun();
+        myFun.Invoke();
+        myFun = null;
+
+        myEvent = TestFun;
+        myEvent += TestFun;
+        myEvent();
+        myEvent.Invoke();
+        myEvent = null;
+    }
+
+    public void TestFun()
+    {
+        Console.WriteLine("TestFun");
+    }
+
+    //事件只能在类内部被封装调用，所以会更安全
+    public void DoEvent()
+    {
+        if(myEvent != null) myEvent();
+    }
+
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Test t = new Test();
+        //委托可以在外部赋值、调用
+        t.myFun = Func;
+        t.myFun = null;
+        t.myFun();
+        t.myFun.Invoke();
+        //委托不能在类的外部赋值、调用
+        //  t.myEvent = Func;   错误
+        //委托可以在外部+=，-=
+        t.myEvent += Func;
+        //  t.myEvent();        错误
+
+        //委托可以作为临时变量存放函数
+        Action f = Func;
+        //事件不能作为临时变量存放函数
+        //  event Action e = Func;  错误
+
+    }
+
+    static void Func()
+    {
+  
+    }
+}
+
+```
+
+#### 总结：为什么要用事件？
+
+1. 防止外部随意置空、调用委托
+2. 事件相当于对委托又进行了一个封装，让他更加安全，只能在类的内部封装调用
+
+> 习题
+
+![1750662310381](https://img2023.cnblogs.com/blog/3614909/202506/3614909-20250623150530753-324510699.png)
 
 
-## 匿名函数
+### 匿名函数
 
 
-## Lambda表达式
+### Lambda表达式
+
+## List排序
+
+## 协变逆变
+
+## 多线程
+
+## 预处理器指令
+
+## 反射和特性
+
+> 程序集：代码集合会被编译器编译为一个程序集，在windows中，就是后缀.dll库文件和.exe可执行文件
+
+> 元数据：用来描述数据的数据。程序中的类，类中的成员 就是程序的元数据。
+
+### 反射
+
+**反射**：在程序运行时，通过反射可以得到其他或自身程序集代码的元数据。
+
+——也就是通过反射可以得到类、函数、变量、对象，然后实例化、调用他们
+
+反射的作用：
+
+1. 反射可以在程序编译后获得信息，所以反射提高了程序的拓展性、灵活性
+2. 程序运行时，可以得到所有元数据及其特性、可以实例化对象、操作对象、创建新对象
+
+——也就是通过反射，可以直接去调用另一个程序集里写好的代码的各种信息
+
+> 反射是unity脚本工作的基本原理
+
+```csharp
+namespace 反射;
+
+class Test
+{
+    private int i = 1;
+    public int j = 2;
+    public string str = "123";
+    public Test() { }
+    public Test(int i)
+    {
+        this.i = i;
+    }
+    public Test(int i, string str) : this(i)
+    {
+        this.str = str;
+    }
+    public void Speak()
+    {
+        Console.WriteLine(i);
+    }
+}
+```
+
+#### Type——类的信息类
+
+Type是反射的基础，是访问元数据的主要方式
+
+使用Type的成员获取有关类型申明的信息(构造函数、方法、字段、属性、类的事件)
+
+##### 三种获取Type的方式：
+
+```csharp
+        //获取Type：
+        //  1.object中的.GetType()获取对象的Type
+        int a = 42;
+        Type type = a.GetType();
+        Console.WriteLine(type);
+        //  2.通过typeof关键字，传入类名，获取对象的Type
+        Type type2 = typeof(int);
+        Console.WriteLine(type2);
+        //  3.通过类名，获取对象的Type
+        Type type3 = Type.GetType("System.Int32");
+        Console.WriteLine(type3);
+```
+
+每一个类型的Type是唯一的，所以虽然有三个Type变量来存，但这里指向堆内存里的地址是一样的
+
+##### 获取类的程序集信息：
+
+```csharp
+        //得到类的程序集信息
+        //  通过Type变量名.Assembly得到类型所在程序集信息
+        Console.WriteLine(type.Assembly);
+```
+
+##### 获取类中的所有公共成员:
+
+```csharp
+        //获取类中的所有公共成员：
+        //  先得到类的Type
+        Type t = typeof(Test);
+        //  用.GetMembers()获取类中的所有公共成员，需要先using System.Reflection;
+        MemberInfo[] infos = t.GetMembers();
+        foreach (var info in infos)
+        {
+            Console.WriteLine(info);
+        }
+```
+
+##### 获取类的公共构造函数并调用：
+
+```csharp
+        //获取类的公共构造函数并调用：
+        //  1.用.GetConstructors()获取所有构造函数
+        ConstructorInfo[] cis = t.GetConstructors();
+        foreach (var ci in cis)
+        {
+            Console.WriteLine(ci);
+        }
+        //  2.用GetConstructor()获取其中一个构造函数并用.Invoke()执行
+        //步骤如下：
+        //得构造函数，传入Type数组，数组中的内容按顺序填入typeof(构造函数参数类型)
+        //执行构造函数，传入object数组，数组中按顺序传入参数
+  
+        //  无参构造
+        //      得到无参构造，直接传参new Type[0]
+        ConstructorInfo info1 = t.GetConstructor(new Type[0]);
+        //      用.Invoke()执行无参构造，传参null
+        Test obj = info1.Invoke(null) as Test;
+        Console.WriteLine(obj.j);
+
+        //  有参构造
+        //      得到有参构造，直接传参new Type[]{typeof( )}
+        ConstructorInfo info2 = t.GetConstructor(new Type[] { typeof(int) });
+        obj = info2.Invoke(new object[] { 1 }) as Test;
+        Console.WriteLine(obj.str);
+
+        ConstructorInfo info3 = t.GetConstructor(new Type[] { typeof(int), typeof(string) });
+        obj = info3.Invoke(new object[] { 1, "fuck" }) as Test;
+        Console.WriteLine(obj.str);
+```
+
+##### 获取类的公共成员变量：
+
+```csharp
+        //获取类的公共成员变量：
+        //  1.用.GetFields()得到所有公共成员变量，存在FieldInfo[]数组中
+        FieldInfo[] fields = t.GetFields();
+        foreach (FieldInfo field in fields)
+        {
+            Console.WriteLine(field);
+        }
+        //  2.用.GetField("公共成员变量名")得到指定名称的公共成员变量，存在FieldInfo中
+        FieldInfo infoJ = t.GetField("j");
+        Console.WriteLine(infoJ);
+        FieldInfo infoStr = t.GetField("str");
+        Console.WriteLine(infoStr);
+
+        //  3.通过反射获取和设置对象的值
+        Test test = new Test();
+        test.j = 99;
+        test.str = "2222";
+        //      通过反射，用 对象的某个成员变量名.GetValue(对象名) 获取对象的某个成员变量的值
+        Console.WriteLine(infoJ.GetValue(test));
+        //      通过反射，用 对象的某个成员变量名.SetValue(对象名, 要设置的值) 设置指定对象的某个成员变量的值
+        infoJ.SetValue(test, 999);
+        Console.WriteLine(infoJ.GetValue(test));
+```
+
+##### 获取类的公共成员方法：
+
+```csharp
+        //获取类的公共成员方法：
+        //通过Type类的GetMethod()方法，获取类中的公共方法，存在MethodInfo中
+        Type strType = typeof(string);
+        MethodInfo[] methodInfos = strType.GetMethods();
+        foreach (MethodInfo methodInfo in methodInfos)
+        {
+            Console.WriteLine(methodInfo);
+        }
+        //  1.如果有方法重载，用Type数组表示参数类型
+        MethodInfo subStr = strType.GetMethod("Substring",
+                                    new Type[] { typeof(int), typeof(int) });
+        //  2.调用该方法
+        //  注意：如果是静态方法，Invoke()中的第一个参数要传入null
+        string str = "1234567890";
+        object result = subStr.Invoke(str, new object[] { 2, 4 });
+        Console.WriteLine(result);
+```
+
+##### 其他获取：
+
+```csharp
+        //其他获得：
+        //  得枚举：GetEnumName
+        //  得事件：GetEvent
+        //  得属性：GetProperty
+        //  得接口：GetInterface  
+```
+
+#### Activator——快速实例化对象的类
+
+将Type对象快捷实例化为对象
+
+```csharp
+        #region Activator
+        //先得到Type
+        Type testType = typeof(Test);
+        //1.无参构造Activator.CreateInstance(Type对象)
+        Test testObject = Activator.CreateInstance(testType) as Test;
+        Console.WriteLine(testObject.str);
+        //2.有参构造Activator.CreateInstance(Type对象,参数)
+        testObject = Activator.CreateInstance(testType, 99) as Test;
+        Console.WriteLine(testObject.j);
+        testObject = Activator.CreateInstance(testType, 99, "111111") as Test;
+        Console.WriteLine(testObject.str);
+        #endregion
+```
+
+#### Assembly——程序集类
+
+用来加载其他程序集
+
+```csharp
+        #region Assembly
+        //三种加载程序集的方法
+        //1.Load("程序集名称")  同一文件下的其他程序集
+        Assembly a1 = Assembly.Load("System");
+        //2.LoadFrom("程序集绝对路径")  加载一个完整的程序集及其依赖
+        //注意：可以用反转义字符@
+        Assembly a2 = Assembly.LoadFrom("/Users/User/Desktop/CSharp/CSharp_advanced/反射/bin/Debug/net7.0/反射.dll");
+        //3.LoadFile("程序集绝对路径")  仅加载指定文件中的程序集，不处理依赖
+        Assembly a3 = Assembly.LoadFile("/Users/User/Desktop/CSharp/CSharp_advanced/Lesson18_练习题/bin/Debug/netcoreapp3.1/Lesson18_练习题.dll");
+        Type[] types = a3.GetTypes();
+        foreach (Type t in types)
+        {
+            Console.WriteLine(t);
+        }
+        //加载完程序集中的类对象，下面使用反射
+        Type icon = a3.GetType("Lesson18_练习题.Icon");
+        MemberInfo[] members = icon.GetMembers();
+        foreach (MemberInfo m in members)
+        {
+            Console.WriteLine(m);
+        }
+        //通过反射实例化
+        //这是一个枚举Type
+        Type moveDir = a3.GetType("Lesson18_练习题.E_MoveDir");
+        FieldInfo right = moveDir.GetField("Right");
+        //直接实例化对象
+        object iconObj = Activator.CreateInstance(icon, 10, 5, right.GetValue(null));
+        //通过反射得到对象中的方法
+        MethodInfo move = icon.GetMethod("Move");
+        MethodInfo draw = icon.GetMethod("Draw");
+        MethodInfo clear = icon.GetMethod("Clear");
+
+        Console.Clear();
+        while (true)
+        {
+            Thread.Sleep(1000);
+            clear.Invoke(iconObj, null);
+            move.Invoke(iconObj, null);
+            draw.Invoke(iconObj, null);
+        }
+
+        #endregion
+
+```
+
+> 习题
+
+![1751295968920](image/CSharp_advanced/1751295968920.png)
 
 
-# 协变逆变
+### 特性
 
-# 多线程
+## 迭代器
 
-# 预处理器指令
+## 特殊语法
 
-# 反射和特性
+## 排序进阶
 
-# 迭代器
+## 异步编程——async 和 await
 
-# 特殊语法
-
-# 各种排序
-
-# 游戏常用查找(寻路)
+## 游戏常用查找(寻路)

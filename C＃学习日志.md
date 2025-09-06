@@ -9212,7 +9212,6 @@ class Program
 
 ### 匿名函数
 
-
 ### Lambda表达式
 
 ## 反射和特性
@@ -9320,7 +9319,7 @@ Type是反射的基础，是访问元数据的主要方式
         //步骤如下：
         //得构造函数，传入Type数组，数组中的内容按顺序填入typeof(构造函数参数类型)
         //执行构造函数，传入object数组，数组中按顺序传入参数
-      
+  
         //  无参构造
         //      得到无参构造，直接传参new Type[0]
         ConstructorInfo info1 = t.GetConstructor(new Type[0]);
@@ -9329,7 +9328,7 @@ Type是反射的基础，是访问元数据的主要方式
         Console.WriteLine(obj.j);
 
         //  有参构造
-        //      得到有参构造，直接传参new Type[]{typeof(int)}
+        //      得到有参构造，直接传参new Type[]{typeof( )}
         ConstructorInfo info2 = t.GetConstructor(new Type[] { typeof(int) });
         obj = info2.Invoke(new object[] { 1 }) as Test;
         Console.WriteLine(obj.str);
@@ -9396,6 +9395,8 @@ Type是反射的基础，是访问元数据的主要方式
         //  得属性：GetProperty
         //  得接口：GetInterface  
 ```
+
+#### Activator——快速实例化对象的类
 
 
 ### 特性
